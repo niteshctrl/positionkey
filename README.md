@@ -1,6 +1,8 @@
 <div align="center">
-  <img src="https://github.com/niteshctrl/positionkey/blob/main/images/pkj.jpg">
-</div>div>
+  <img src="">
+</div>
+
+![pkj](https://github.com/niteshctrl/positionkey/assets/40490290/a5747fab-10ab-4ba4-9333-542a738e9fe8)
 
 
 # Position Key: Relax your fingers
