@@ -14,18 +14,27 @@ import pyautogui             # pip install pyautogui
 import csv
 import os.path
 
-mid_position = 1850
+mid_position = 1920
 prev_key = 'Key.ctrl'
 
 # Recalling button positions from CSV file, if present
-if os.path.isfile('button_positions.csv'):
-    csv_reader = csv.reader(open('button_positions.csv', 'r'))
+if os.path.isfile('click_positions.csv'):
+    csv_reader = csv.reader(open('click_positions.csv', 'r'))
     ob = list(csv_reader)
-    # print(ob)
-    dismiss = (int(ob[0][0]), int(ob[0][1]))
-    verify = (int(ob[1][0]), int(ob[1][1]))
-    confirm = (int(ob[2][0]), int(ob[2][1]))
-    cancel = (int(ob[3][0]), int(ob[3][1]))
+    
+    try: # Linux Kernel
+        dismiss = (int(ob[0][0]), int(ob[0][1]))
+        verify = (int(ob[1][0]), int(ob[1][1]))
+        confirm = (int(ob[2][0]), int(ob[2][1]))
+        cancel = (int(ob[3][0]), int(ob[3][1]))
+
+    except: # Windows Kernel
+        print('Windows Detected')
+        dismiss = (int(ob[0][0]), int(ob[0][1]))
+        verify = (int(ob[2][0]), int(ob[2][1]))
+        confirm = (int(ob[4][0]), int(ob[4][1]))
+        cancel = (int(ob[6][0]), int(ob[6][1]))
+
 else:  # If CSV file is absent
     dismiss = (700, 0)
     verify = (700, 0)
@@ -47,7 +56,7 @@ def on_press(key):
 
         if key.char == 'p' and prev_key == "Key.ctrl":
             mid_position = pyautogui.position()[0]
-            print("New Mid-Position Recorded")
+            print("New Partition Recorded")
 
         elif pyautogui.position()[0] < mid_position:
             if key.char == 'd':
@@ -75,7 +84,7 @@ def on_press(key):
                 elif key.char == '4':
                     cancel = pyautogui.position()
                     print('New location of CANCEL recorded')
-                with open('button_positions.csv', 'w+') as file:
+                with open('click_positions.csv', 'w+') as file:
                     csv_writer = csv.writer(file)
                     csv_writer.writerows([dismiss, verify, confirm, cancel])
         prev_key = "NULL"
