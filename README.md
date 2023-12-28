@@ -1,5 +1,5 @@
 
-![pkj](https://github.com/niteshctrl/positionkey/assets/40490290/a5747fab-10ab-4ba4-9333-542a738e9fe8)
+![pkj](https://s3.amazonaws.com/niteshctrl.com/images/positionkey.png)
 
 
 # Position Key: Relax your fingers
@@ -14,18 +14,14 @@ PositionKey is available on PyPI as ```positionkey```.
 ```
 pip install positionkey
 ```
-For positionkey for function properly, some dependencies will automatically be installed.
+For positionkey for function properly, the dependencies will automatically be installed.
 
 ### Local Installation
 PositionKey is compatible with Linux and Windows systems. To install a local version:
 
-1. Install dependencies:
+1. Run installation command from the root directory:
 ```
-pip install -r requirements.txt
-```
-2. Run installation command from the root directory:
-```
-python setup.py --install
+pip install .
 ```
 
 

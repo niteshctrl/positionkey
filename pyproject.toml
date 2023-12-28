@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools",  "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "positionkey"
+version = "1.0.0"
+dependencies = ["pyautogui==0.9.53", 
+                "pynput==1.6.7"]
+authors = [{ name="Nitesh Prasad", email="nitesh1612@gmail.com" }]
+description = "A multi-platform python package for mapping key strokes to mouse clicks."
+readme = "README.md"
+requires-python = ">=3.6"
+license = {file = "LICENSE"}
+keywords = ["tdac", 
+            "keyboard shortcut", 
+            "annotation", 
+            "labelling"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+
+[project.urls]
+Documentation = "https://github.com/niteshctrl/positionkey/blob/main/README.md"
+Repository = "https://github.com/niteshctrl/positionkey/"
+Issues = "https://github.com/niteshctrl/positionkey/issues"
