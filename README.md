@@ -1,3 +1,8 @@
+<div align="center">
+  <img src="https://github.com/niteshctrl/positionkey/blob/main/images/pkj.jpg">
+</div>div>
+
+
 # Position Key: Relax your fingers
 PositionKey is a multi-platform python package for mapping key strokes to mouse clicks.
 
