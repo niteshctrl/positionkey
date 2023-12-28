@@ -1,4 +1,34 @@
-# positionkey
+# Position Key: Relax your fingers
+
+## Installation
+
+### Install with pip
+PositionKey is available on PyPI as ```positionkey```. 
+1. Install PositionKey:
+```
+pip install positionkey
+```
+For positionkey for function properly, some dependencies will automatically be installed.
+
+### Local Installation
+PositionKey is compatible with Linux and Windows systems. To install a local version:
+
+1. Install dependencies:
+```
+pip install -r requirements.txt
+```
+2. Run installation command from the root directory:
+```
+python setup.py --install
+```
+
+## Why use PositionKey?
+
+## Usage Demo
+
+## Licence
+[MIT Licence](https://github.com/niteshctrl/positionkey/blob/main/LICENSE)
+
 ## Mouse clicks(GUI) mapped to keypresses
 
 Positionkey is a python library for mapping keystrokes to mouse clicks. Currently, there are four keys mapped: **D, V, L and C** which stands for words Dismiss, Verify, Long and Cancel respectively. These four keystrokes can store and hit four positions on the GUI screen. 
