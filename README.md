@@ -1,4 +1,5 @@
 # Position Key: Relax your fingers
+PositionKey is a multi-platform python package for mapping key strokes to mouse clicks.
 
 ## Installation
 
