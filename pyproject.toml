@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "positionkey"
-version = "1.0.0"
+version = "1.1.0"
 dependencies = ["pyautogui==0.9.53", 
                 "pynput==1.6.7"]
 authors = [{ name="Nitesh Prasad", email="nitesh1612@gmail.com" }]

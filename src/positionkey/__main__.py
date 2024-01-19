@@ -1,77 +1,65 @@
-"""
-This script simulates the mouse clicks with keyboard's keys.
-Buttons refer to 'DISMISS', 'VERIFY', 'CONFIRM' and 'CANCEL' buttons on Verification Portal.
-Please record the button positions before using on a new system...
-by numeric keys '1', '2', '3' and '4' for 'DISMISS' 'VERIFY', 'CONFIRM' and 'CANCEL' respectively.
-Only alerts from 'Alert Feeds' and not "outstanding" are accessible as of now.
-Sometimes button positions change due to varying length of alert title, re-record the button position in such cases.
-d = 'DISMISS'  |   v = 'VERIFY'    |   l = 'CONFIRM'   | c = 'CANCEL'
-"""
-
 from pynput import keyboard  # pip install pynput
-
 import pyautogui             # pip install pyautogui
 import csv
 import os.path
 
-mid_position = 1920
+
+start_position = 0
+mid_position = 4000
 prev_key = 'Key.ctrl'
+flag = 'record'
 
-# Recalling button positions from CSV file, if present
-if os.path.isfile('click_positions.csv'):
-    csv_reader = csv.reader(open('click_positions.csv', 'r'))
+# Recalling button positions from CSV file
+if os.path.isfile('button_positions.csv'):
+    csv_reader = csv.reader(open('button_positions.csv', 'r'))
     ob = list(csv_reader)
-    
-    try: # Linux Kernel
-        dismiss = (int(ob[0][0]), int(ob[0][1]))
-        verify = (int(ob[1][0]), int(ob[1][1]))
-        confirm = (int(ob[2][0]), int(ob[2][1]))
-        cancel = (int(ob[3][0]), int(ob[3][1]))
-
-    except: # Windows Kernel
-        print('Windows Detected')
-        dismiss = (int(ob[0][0]), int(ob[0][1]))
-        verify = (int(ob[2][0]), int(ob[2][1]))
-        confirm = (int(ob[4][0]), int(ob[4][1]))
-        cancel = (int(ob[6][0]), int(ob[6][1]))
-
+    dismiss = (int(ob[0][0]), int(ob[0][1]))
+    verify = (int(ob[2][0]), int(ob[2][1]))
+    confirm = (int(ob[4][0]), int(ob[4][1]))
+    cancel = (int(ob[6][0]), int(ob[6][1]))
+    # startEnd = (int(ob[8][0]), int(ob[8][1]))
 else:  # If CSV file is absent
     dismiss = (700, 0)
     verify = (700, 0)
     confirm = (700, 0)
     cancel = (700, 0)
+    startEnd = (0, 4000)
 ###################################################
 
-print("\nTo kill the script instantly , use 'Esc' key\n")
-print("d = 'DISMISS' button  |   v = 'VERIFY' button    |   l = 'CONFIRM' button   | c = 'CANCEL' button\n")
-print('Record button positions instantly by keys "1" for DISMISS, "2" for VERIFY, "3" for CONFIRM \
-and "4" for CANCEL')
+print("\n Use 'Esc' key to kill the script instantly\n")
+print("d = 'DISMISS' |   v = 'VERIFY' |   l = 'Verify CONFIRM' | c = 'Dismiss Confirm' \n")
+print('Record button positions by keys \n"1" for DISMISS, "2" for VERIFY, "3" for VERIFY CONFIRM \
+and "4" for DISMISS Confirm')
 
 
-def on_press(key):    
-    global dismiss, verify, confirm, cancel, mid_position, prev_key
+def on_press(key):
+    global dismiss, verify, confirm, cancel, mid_position, prev_key, flag, start_position
     try:
         '''print('alphanumeric key {0} pressed'.format(
             key.char))'''
 
-        if key.char == 'p' and prev_key == "Key.ctrl":
+        if key.char == 'o':
+            start_position = pyautogui.position()[0]
+            print("\n \nNew Start-Position Recorded")
+        if key.char == 'p':
             mid_position = pyautogui.position()[0]
-            print("New Partition Recorded")
+            print("\n\n New End-Position Recorded")
+        
 
-        elif pyautogui.position()[0] < mid_position:
+        elif pyautogui.position()[0] > start_position and pyautogui.position()[0] < mid_position:
             if key.char == 'd':
+                flag = ''
                 pyautogui.click(dismiss)
             elif key.char == 'v':
-                pyautogui.click(verify)
+                flag = ''
+                pyautogui.click(verify)                
             elif key.char == 'l':
                 pyautogui.click(confirm)
             elif key.char == 'c':
                 pyautogui.click(cancel)
-            elif key.char == 'p' and prev_key == "Key.ctrl":
-                mid_position = pyautogui.position()[0]
-                print("New Mid-Position Recorded")
-		        # mid_position = pyautogui.position()[0]
+            
             else:
+#                 if flag == 'record':
                 if key.char == '1':
                     dismiss = pyautogui.position()
                     print('New location of DISMISS recorded')
@@ -84,7 +72,7 @@ def on_press(key):
                 elif key.char == '4':
                     cancel = pyautogui.position()
                     print('New location of CANCEL recorded')
-                with open('click_positions.csv', 'w+') as file:
+                with open('button_positions.csv', 'w+') as file:
                     csv_writer = csv.writer(file)
                     csv_writer.writerows([dismiss, verify, confirm, cancel])
         prev_key = "NULL"
@@ -97,12 +85,12 @@ def on_press(key):
 
 
 def on_release(key):
-    prev_key = "NULL"
+    global prev_key
+    prev_key = key
     # print('{0} released'.format(
     #    key))
-    if pyautogui.position()[0] < mid_position:
-        if key == keyboard.Key.esc:
-            # Stop listener
+    if pyautogui.position()[0] > start_position and pyautogui.position()[0] < mid_position:
+        if key == keyboard.Key.esc: # Stop listener            
             return False
 
 
