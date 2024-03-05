@@ -38,10 +38,10 @@ def on_press(key):
         '''print('alphanumeric key {0} pressed'.format(
             key.char))'''
 
-        if key.char == 'o':
+        if key.char == 'o' and flag == 'record':
             start_position = pyautogui.position()[0]
             print("\n \nNew Start-Position Recorded")
-        if key.char == 'p':
+        if key.char == 'p' and flag == 'record':
             mid_position = pyautogui.position()[0]
             print("\n\n New End-Position Recorded")
         
