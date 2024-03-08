@@ -13,10 +13,16 @@ flag = 'record'
 if os.path.isfile('button_positions.csv'):
     csv_reader = csv.reader(open('button_positions.csv', 'r'))
     ob = list(csv_reader)
-    dismiss = (int(ob[0][0]), int(ob[0][1]))
-    verify = (int(ob[2][0]), int(ob[2][1]))
-    confirm = (int(ob[4][0]), int(ob[4][1]))
-    cancel = (int(ob[6][0]), int(ob[6][1]))
+    try:# Windows Systems
+        dismiss = (int(ob[0][0]), int(ob[0][1]))
+        verify = (int(ob[2][0]), int(ob[2][1]))
+        confirm = (int(ob[4][0]), int(ob[4][1]))
+        cancel = (int(ob[6][0]), int(ob[6][1]))
+    except:
+        dismiss = (int(ob[0][0]), int(ob[0][1]))
+        verify = (int(ob[1][0]), int(ob[1][1]))
+        confirm = (int(ob[2][0]), int(ob[2][1]))
+        cancel = (int(ob[3][0]), int(ob[3][1]))
     # startEnd = (int(ob[8][0]), int(ob[8][1]))
 else:  # If CSV file is absent
     dismiss = (700, 0)
@@ -43,7 +49,7 @@ def on_press(key):
             print("\n \nNew Start-Position Recorded")
         if key.char == 'p' and flag == 'record':
             mid_position = pyautogui.position()[0]
-            print("\n\n New End-Position Recorded")
+            print("\n\nNew End-Position Recorded")
         
 
         elif pyautogui.position()[0] > start_position and pyautogui.position()[0] < mid_position:
