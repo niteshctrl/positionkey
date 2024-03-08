@@ -5,11 +5,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "positionkey"
-version = "1.1.1"
+version = "1.1.2"
 dependencies = ["pyautogui==0.9.53", 
                 "pynput==1.6.7"]
 authors = [{ name="Nitesh Prasad", email="nitesh1612@gmail.com" }]
-description = "A multi-platform python package for mapping key strokes to mouse clicks."
+description = "A multi-platform python package for mdapping key strokes to mouse clicks."
 readme = "README.md"
 requires-python = ">=3.6"
 license = {file = "LICENSE"}
